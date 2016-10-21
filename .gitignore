@@ -1,0 +1,13 @@
+.Python
+[B]in
+[Ii]nclude
+[Ll]ib
+*.pyc
+*.log
+.project
+.pydevproject
+.idea
+*.log.*
+*.pid
+
+

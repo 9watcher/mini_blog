@@ -1,0 +1,63 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+{% load myfilter %}
+
+{% block content %}
+
+    <div class="container" style="margin: 20px">
+
+        <div class="row col-sm-8 col-sm-offset-2">
+            {% for result in results %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><strong>{{ result.title }}</strong></h4><samll>发布时间：{{ result.published_time }} </samll>
+                </div>
+                <div class="panel-body">
+                    {{ result.content|truncatechars:90  }}
+                </div>
+                <div class="panel-footer">
+                    <a href="{% url 'blog_detail' result.id %}" class="btn btn-sm btn-primary align-left">
+                        阅读全文
+                    </a>
+                    <span class="label label-default align-right">评论数:{{ ds_result|key:result.id|key:"comments"}}</span>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="pagination">
+                <span class="step-links">
+                    {% if results.has_previous %}
+                        <a class='paginator' title='上一页' href='?page={{ results.previous_page_number }}'><span>&lt;&lt;</span></a>
+                    {% endif %}
+                    {% for page in results.paginator.page_range %}
+                        {% if page == results.number %}
+                        <a class='paginator_current' title='当前页:{{ page }}'><span>{{ page }}</span></a>
+                        {% else %}
+                        <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
+                        {% endif %}
+                    {% endfor %}
+                        {% if blogs.has_next %}
+                        <a class='paginator' title='下一页' href='?page={{ results.next_page_number }}'><span>&gt;&gt;</span></a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+<!--<script>
+    $(document).ready(function(){
+        function get_num(id) {
+            comment_url = 'http://api.duoshuo.com/threads/counts.json?short_name=official&threads=4ff1cbc43ae636b72a00001d'
+        }
+        $.ajax({
+            url: ,
+            type: "GET",
+            data: {type_val: $('#physical_flag_id').find("option:selected").val()},
+            datatype: "json",
+            success: function (json) {
+                $.each(json, function (i, k) {
+                    $("#rack_id").append("<option value='" + i + "'>" + k + "</option>");
+                })
+            },
+        });
+    });
+</script>-->
+{% endblock %}
