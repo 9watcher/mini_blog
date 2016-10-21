@@ -29,6 +29,17 @@ def index(request):
 	return render(request, 'blog/index.html', locals())
 
 
-def blog_detail(request, blog_id):
+def blog_detail(request):
+	blog_id = request.GET.get('id', '')
+	print ">>>>>>>>>>>>>>>>>>>>", blog_id
 	result = Article.objects.filter(id=blog_id).first()
 	return render(request, 'blog/blog.html', locals())
+
+
+def about(request):
+	return render(request, 'blog/about.html', locals())
+
+
+def contact(request):
+
+	return render(request, 'blog/contact.html', locals())

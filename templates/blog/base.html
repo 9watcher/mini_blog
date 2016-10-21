@@ -1,84 +1,97 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html lang="zh-cn">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
-    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!--[if lt IE 9]>
-			<script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-</head>
-<body>
-<!--Here is the navbar-->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#navbar-collapse-basepage">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#" class="navbar-brand">Library</a>
-        </div>
+<html>
+	<head>
+		<title>9Watcher</title>
 
-        <div class="collapse navbar-collapse" id="navbar-collapse-basepage">
-            <ul class="nav navbar-nav">
-                <li id="homepage"><a href="{% url 'index'  %}">主页</a></li>
-                <!--{% if user.myuser.permission > 1 %}-->
-                    <!--<li id="add_book"><a href="#">关于</a></li>-->
-                    <!--<li id="add_img"><a href="#">添加图片</a></li>-->
-                <!--{% endif %}-->
-                <li id="view_book"><a href="#">关于</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if user %}
-                    <li><p class="navbar-text">欢迎你&nbsp;&nbsp;<span id="base_name">{{ user.myuser.nickname }}</span></p>
-                    </li>
-                    <li><a href="#">注销</a></li>
-                    <li><a href="#">修改密码</a></li>
-                {% else %}
-                    <li><a href="#">注册</a></li>
-                    <li><a href="#">登录</a></li>
-                {% endif %}
-            </ul>
-        </div>
+		<!-- meta -->
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    </div>
-</nav>
-<!-- /nav -->
-<!-- header -->
-<!--<header class="jumbotron subhead" id="header-base">-->
-    <!--<div class="container">-->
-        <!--<h1>图书管理系统</h1>-->
-        <!--<h3>&emsp;&emsp;知识改变命运</h3>-->
-    <!--</div>-->
-<!--</header>-->
-<!-- /.header -->
-<!-- main part -->
-{% block content %}{% endblock %}
-<!-- /.main -->
+	    <!-- css -->
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/pace.css' %}">
+	    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
-<!-- footer -->
-<footer class="footer" role="contentinfo">
-    <hr>
-    <div class="container">
-        <p class="text-center"><strong>Mini-Blog</strong></p>
-        <p class="text-center">©All rights reserved</p>
-        <h5 class="text-center"> Powered by&nbsp;<a href="#">Gary Qiu</a></h5>
-    </div>
-</footer>
-<!-- /.footer-->
-<script type="text/javascript">
-    $('#{{active_menu}}').addClass("active");
-</script>
-</body>
+	    <!-- js -->
+	    <script src="{% static 'js/jquery-2.1.3.min.js'%}"></script>
+	    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+	    <script src="{% static 'js/pace.min.js'%}"></script>
+	    <script src="{% static 'js/modernizr.custom.js' %}"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<header id="site-header">
+				<div class="row">
+					<div class="col-md-4 col-sm-5 col-xs-8">
+						<div class="logo">
+							<h1><a href="{% url 'index' %}"><b>9</b> &amp; Whatcher</a></h1>
+						</div>
+					</div><!-- col-md-4 -->
+					<div class="col-md-8 col-sm-7 col-xs-4">
+						<nav class="main-nav" role="navigation">
+							<div class="navbar-header">
+  								<button type="button" id="trigger-overlay" class="navbar-toggle">
+    								<span class="ion-navicon"></span>
+  								</button>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  								<ul class="nav navbar-nav navbar-right">
+    								<li class="cl-effect-11"><a href="{% url 'index' %}" data-hover="Home">Home</a></li>
+    								<li class="cl-effect-11"><a href="{% url 'index' %}" data-hover="Blog">Blog</a></li>
+    								<li class="cl-effect-11"><a href="{% url 'about' %}" data-hover="About">About</a></li>
+    								<li class="cl-effect-11"><a href="{% url 'contact' %}" data-hover="Contact">Contact</a></li>
+  								</ul>
+							</div><!-- /.navbar-collapse -->
+						</nav>
+						<div id="header-search-box">
+							<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+							<div id="search-form" class="search-form">
+								<form role="search" method="get" id="searchform" action="#">
+									<input type="search" placeholder="Search" required>
+									<button type="submit"><span class="ion-ios-search-strong"></span></button>
+								</form>
+							</div>
+						</div>
+					</div><!-- col-md-8 -->
+				</div>
+			</header>
+		</div>
+		<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
+
+		<div class="content-body">
+			<div class="container">
+				{% block content %}
+                {% endblock %}
+			</div>
+		</div>
+		<footer id="site-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright">&copy; 2014 ThemeWagon.com -More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Mobile Menu -->
+		<div class="overlay overlay-hugeinc">
+			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="full-width.html">Blog</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<script src="{% static 'js/script.js'%}"></script>
+
+	</body>
 </html>

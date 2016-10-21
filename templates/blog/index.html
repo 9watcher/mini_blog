@@ -1,27 +1,33 @@
 {% extends "blog/base.html" %}
-{% load staticfiles %}
 {% load myfilter %}
 
 {% block content %}
-
-    <div class="container" style="margin: 20px">
-
-        <div class="row col-sm-8 col-sm-offset-2">
+    <div class="row">
+        <main class="col-md-8">
             {% for result in results %}
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4><strong>{{ result.title }}</strong></h4><samll>发布时间：{{ result.published_time }} </samll>
+
+            <article class="post post-1">
+                <header class="entry-header">
+                    <h1 class="entry-title">
+                        {{ result.title }}
+                    </h1>
+                    <div class="entry-meta">
+                        <span class="post-category"><a href="#">{{ result.category }}</a></span>
+
+                        <span class="post-date"><a href="#"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ result.published_date }}</time></a></span>
+
+                        <span class="post-author"><a href="#">Gary Qiu</a></span>
+
+                        <span class="comments-link"><a href="#">{{ ds_result|key:result.id|key:"comments"}}条评论</a></span>
+                    </div>
+                </header>
+                <div class="entry-content clearfix">
+                    <p>{{ result.content|truncatechars:100  }}</p>
+                    <div class="read-more cl-effect-14">
+                        <a href="{% url 'blog_detail' %}?id={{ result.id }}" class="more-link">Rede more<span class="meta-nav">→</span></a>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    {{ result.content|truncatechars:90  }}
-                </div>
-                <div class="panel-footer">
-                    <a href="{% url 'blog_detail' result.id %}" class="btn btn-sm btn-primary align-left">
-                        阅读全文
-                    </a>
-                    <span class="label label-default align-right">评论数:{{ ds_result|key:result.id|key:"comments"}}</span>
-                </div>
-            </div>
+            </article>
             {% endfor %}
             <div class="pagination">
                 <span class="step-links">
@@ -40,24 +46,53 @@
                     {% endif %}
                 </span>
             </div>
-        </div>
+        </main>
+        <aside class="col-md-4">
+            <div class="widget widget-recent-posts">
+                <h3 class="widget-title">Recent Posts</h3>
+                <ul>
+                    <li>
+                        <a href="#">Adaptive Vs. Responsive Layouts And Optimal Text Readability</a>
+                    </li>
+                    <li>
+                        <a href="#">Web Design is 95% Typography</a>
+                    </li>
+                    <li>
+                        <a href="#">Paper by FiftyThree</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="widget widget-archives">
+                <h3 class="widget-title">Archives</h3>
+                <ul>
+                    <li>
+                        <a href="#">November 2014</a>
+                    </li>
+                    <li>
+                        <a href="#">September 2014</a>
+                    </li>
+                    <li>
+                        <a href="#">January 2013</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="widget widget-category">
+                <h3 class="widget-title">Category</h3>
+                <ul>
+                    <li>
+                        <a href="#">Web Design</a>
+                    </li>
+                    <li>
+                        <a href="#">Web Development</a>
+                    </li>
+                    <li>
+                        <a href="#">SEO</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
     </div>
-<!--<script>
-    $(document).ready(function(){
-        function get_num(id) {
-            comment_url = 'http://api.duoshuo.com/threads/counts.json?short_name=official&threads=4ff1cbc43ae636b72a00001d'
-        }
-        $.ajax({
-            url: ,
-            type: "GET",
-            data: {type_val: $('#physical_flag_id').find("option:selected").val()},
-            datatype: "json",
-            success: function (json) {
-                $.each(json, function (i, k) {
-                    $("#rack_id").append("<option value='" + i + "'>" + k + "</option>");
-                })
-            },
-        });
-    });
-</script>-->
+
 {% endblock %}
+

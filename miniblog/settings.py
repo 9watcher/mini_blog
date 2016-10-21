@@ -109,6 +109,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 
     ('css', os.path.join(STATIC_ROOT, 'css').replace('\\', '/')),
+    ('img', os.path.join(STATIC_ROOT, 'img').replace('\\', '/')),
     ('js', os.path.join(STATIC_ROOT, 'js').replace('\\', '/')),
     ('fonts', os.path.join(STATIC_ROOT, 'fonts').replace('\\', '/')),
 )

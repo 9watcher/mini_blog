@@ -1,0 +1,22 @@
+{% extends "blog/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="container" style="margin: 20px">
+
+        <div class="row col-sm-8 col-sm-offset-2">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4><strong>{{ result.title }}</strong></h4><samll>发布时间：{{ result.published_time }} </samll>
+                </div>
+                <div class="panel-body">
+                    {{ result.content}}
+                </div>
+            </div>
+            {% include "blog/duoshuo.html" %}
+        </div>
+    </div>
+
+{% endblock %}
